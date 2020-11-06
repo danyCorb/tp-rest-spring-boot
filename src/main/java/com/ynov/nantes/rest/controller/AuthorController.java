@@ -4,13 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ynov.nantes.rest.entity.Author;
 import com.ynov.nantes.rest.repository.AuthorRepository;
@@ -52,6 +46,12 @@ public class AuthorController {
     public Author editAuthor(@RequestBody Author author) {
         Author updated = authorRepository.save(author);
         return updated;
+    }
+
+    @ResponseBody
+    @DeleteMapping("/author/{id}")
+    public void deleteAuthor(final @PathVariable("id") String authorId) {
+        authorRepository.deleteById(Integer.valueOf(authorId));
     }
 
 }
